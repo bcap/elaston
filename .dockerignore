@@ -1,0 +1,7 @@
+.*
+*.log
+*.zip
+
+Makefile
+Dockerfile
+cleanup.sh
