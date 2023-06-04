@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
 
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	lambdaT "github.com/aws/aws-sdk-go-v2/service/lambda/types"
@@ -50,5 +51,14 @@ func (aws *AWS) LambdaFunctionConsoleURL(functionName string) string {
 	return fmt.Sprintf(
 		"https://%s.console.aws.amazon.com/lambda/home?region=%s#/functions/%s?tab=monitoring",
 		region, region, functionName,
+	)
+}
+
+func (aws *AWS) LambdaFunctionLogsConsoleURL(functionName string) string {
+	region := aws.Config.Region
+	functionNameEncoded := url.QueryEscape(functionName)
+	return fmt.Sprintf(
+		"https://%s.console.aws.amazon.com/cloudwatch/home?region=%s#logsV2:log-groups/log-group/%s",
+		region, region, functionNameEncoded,
 	)
 }
