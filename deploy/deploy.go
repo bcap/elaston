@@ -139,7 +139,7 @@ func deployLambdaFunction(ctx context.Context, aws *aws.AWS, name string, execut
 		maxWait := 10 * time.Second
 		start := time.Now()
 		for {
-			log.Printf("Will upload %d Kb of zipped code", len(zippedCodeBytes)/1024)
+			log.Printf("Will upload %dKiB of zipped code", len(zippedCodeBytes)/1024)
 			_, err = aws.Lambda.CreateFunction(ctx, &lambda.CreateFunctionInput{
 				Code:          &lambdaT.FunctionCode{ZipFile: zippedCodeBytes},
 				Role:          &roleARN,
@@ -188,7 +188,7 @@ func deployLambdaFunction(ctx context.Context, aws *aws.AWS, name string, execut
 			return nil, err
 		}
 
-		log.Printf("Will upload %d Kb of zipped code", len(zippedCodeBytes)/1024)
+		log.Printf("Will upload %dKiB of zipped code", len(zippedCodeBytes)/1024)
 		_, err = aws.Lambda.UpdateFunctionCode(ctx, &lambda.UpdateFunctionCodeInput{
 			FunctionName:  &name,
 			ZipFile:       zippedCodeBytes,
